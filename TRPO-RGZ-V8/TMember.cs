@@ -11,19 +11,19 @@ namespace TRPO_RGZ_V8
         int FCoeff { get; set; }
         int FDegree { get; set; }
 
-        TMember(int coeff, int degree)
+        public TMember(int coeff, int degree)
         {
             this.FCoeff = coeff;
             this.FDegree = degree;
         }
 
-        TMember(int coeff)
+        public TMember(int coeff)
         {
             this.FCoeff = coeff;
             this.FDegree = 0;
         }
 
-        TMember()
+        public TMember()
         {
             this.FCoeff = 0;
             this.FDegree = 0;

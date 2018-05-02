@@ -10,7 +10,7 @@ namespace TRPO_RGZ_V8
     {
         static void Main(string[] args)
         {
-
+            TPoly p1 = new TPoly(TPoly.StringToMap(""));
         }
 
         bool testMult(dynamic firstPolinom, dynamic secondPolinom, dynamic answer)
