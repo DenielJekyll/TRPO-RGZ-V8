@@ -8,8 +8,8 @@ namespace TRPO_RGZ_V8
 {
     class TMember
     {
-        int FCoeff { get; set; }
-        int FDegree { get; set; }
+        public int FCoeff { get; set; }
+        public int FDegree { get; set; }
 
         public TMember(int coeff, int degree)
         {
