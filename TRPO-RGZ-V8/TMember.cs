@@ -36,12 +36,12 @@ namespace TRPO_RGZ_V8
 
         public static bool operator !=(TMember p1, TMember p2)
         {
-            return p1.FDegree != p2.FDegree && p1.FCoeff != p2.FCoeff;
+            return p1.FDegree != p2.FDegree || p1.FCoeff != p2.FCoeff;
         }
 
         public TMember Derivative()
         {
-            return new TMember(this.FCoeff * (this.FDegree - 1), this.FDegree - 1);
+            return this.FDegree == 0 ? new TMember() : new TMember(this.FCoeff * (this.FDegree), this.FDegree - 1);
         }
 
         public int Calculate(int x)

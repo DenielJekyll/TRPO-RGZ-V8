@@ -69,6 +69,67 @@ namespace TRPO_RGZ_V8
 
             return new TPoly(result);
         }
+        public static TPoly operator *(TPoly p1, TPoly p2)
+        {
+            SortedDictionary<int, TMember> tempPolynom;
+            TPoly result = new TPoly(TPoly.StringToMap("0x^0"));
+
+            foreach (KeyValuePair<int, TMember> entry1 in p2.polynom)
+            {
+                tempPolynom = new SortedDictionary<int, TMember>();
+                foreach (KeyValuePair<int, TMember> entry2 in p1.polynom)
+                {
+                    int coeff = entry1.Value.FCoeff * entry2.Value.FCoeff;
+                    int degree = entry1.Key + entry2.Key;
+                    tempPolynom.Add(degree, new TMember(coeff, degree));
+                }
+                result = result + (new TPoly(tempPolynom));
+            }
+
+            return result;
+        }
+
+        public static bool operator ==(TPoly p1, TPoly p2)
+        {
+            foreach (KeyValuePair<int, TMember> entry in p2.polynom)
+            {
+                if (p1.polynom.ContainsKey(entry.Key))
+                {
+                    if (p1.polynom[entry.Key] != entry.Value) return false;
+                }
+                else return false;
+            }
+            return true;
+        }
+
+        public static bool operator !=(TPoly p1, TPoly p2)
+        {
+            foreach (KeyValuePair<int, TMember> entry in p2.polynom)
+            {
+                if (p1.polynom.ContainsKey(entry.Key))
+                {
+                    if (p1.polynom[entry.Key] != entry.Value) return true;
+                }
+                else return true;
+            }
+            return false;
+        }
+
+        public TPoly Derivative()
+        {
+            SortedDictionary<int, TMember> result = new SortedDictionary<int, TMember>();
+            foreach (KeyValuePair<int, TMember> entry in this.polynom)
+                result.Add(entry.Key, entry.Value.Derivative());
+            return new TPoly(result);
+        }
+
+        public int Value(int x)
+        {
+            int result = 0;
+            foreach (KeyValuePair<int, TMember> entry in this.polynom)
+                result += entry.Value.Calculate(x);
+            return result;
+        }
 
         public String PolynomToString()
         {
