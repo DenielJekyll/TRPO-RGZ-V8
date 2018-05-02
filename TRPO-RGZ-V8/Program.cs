@@ -10,6 +10,14 @@ namespace TRPO_RGZ_V8
     {
         static void Main(string[] args)
         {
+
+        }
+
+        bool testMult(dynamic firstPolinom, dynamic secondPolinom, dynamic answer)
+        {
+            // TODO: do multiply
+            // return firsPolinom * secondPolinom === answer 
+            return false;
         }
     }
 }
