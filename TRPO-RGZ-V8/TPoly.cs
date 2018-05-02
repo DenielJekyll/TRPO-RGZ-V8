@@ -16,14 +16,14 @@ namespace TRPO_RGZ_V8
             this.polynom = polynom;
         }
 
-        public int degree()
+        public int Degree()
         {
             return this.polynom.Last().Key;
         }
 
         public int GetCoeff(int n)
         {
-            return this.degree() > n ? 0 : this.polynom.ContainsKey(n) ? this.polynom[n].FCoeff : 0;
+            return this.Degree() > n ? 0 : this.polynom.ContainsKey(n) ? this.polynom[n].FCoeff : 0;
         }
 
         public void Clear()
