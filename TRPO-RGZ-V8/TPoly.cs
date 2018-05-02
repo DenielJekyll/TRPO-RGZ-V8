@@ -50,6 +50,25 @@ namespace TRPO_RGZ_V8
 
             return new TPoly(result);
         }
+        public static TPoly operator -(TPoly p1, TPoly p2)
+        {
+            SortedDictionary<int, TMember> result;
+            result = p1.polynom;
+
+            foreach (KeyValuePair<int, TMember> entry in p2.polynom)
+            {
+                if (result.ContainsKey(entry.Key))
+                {
+                    result[entry.Key].FCoeff -= entry.Value.FCoeff; 
+                }
+                else
+                {
+                    result.Add(entry.Key, new TMember(-entry.Value.FCoeff, entry.Key));
+                }
+            }
+
+            return new TPoly(result);
+        }
 
         public String PolynomToString()
         {
