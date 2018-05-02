@@ -131,6 +131,18 @@ namespace TRPO_RGZ_V8
             return result;
         }
 
+        public TMember GetMember(int i)
+        {
+            TMember result;
+            int j = 0;
+            foreach (KeyValuePair<int, TMember> entry in this.polynom.Reverse())
+            {
+                if (j == i) return entry.Value;
+                j++;
+            }
+            throw new Exception("Polinom index out of range!");
+        }
+
         public String PolynomToString()
         {
             String result = "";

@@ -63,6 +63,14 @@ namespace TRPO_RGZ_V8
             TestVal("4x^2-1x^0", 7, 195);
             TestVal("7x^8+2x^2-1x^0", 7, 40353704);
             log(ConsoleColor.Cyan, Consts.finishTestVal);
+            
+            //TestGetMember
+            log(ConsoleColor.Cyan, Consts.startTestGetMember);
+            TestGetMember("1x^0", 0, new TMember(1, 0));
+            TestGetMember("4x^2-1x^0", 1, new TMember(-1, 0));
+            TestGetMember("7x^8+2x^2-1x^0", 2, new TMember(-1, 0));
+            TestGetMember("7x^8+2x^2-1x^0", 0, new TMember(7, 8));
+            log(ConsoleColor.Cyan, Consts.finishTestGetMember);
 
             Console.ReadKey();
         }
@@ -185,6 +193,26 @@ namespace TRPO_RGZ_V8
 
             // write result
             Console.Write(test);
+
+            // checking
+            if (test == answer) log(ConsoleColor.Green, "\t>>> ok \n");
+            else log(ConsoleColor.Red, "\t>>> fail \n");
+        }
+
+        static public void TestGetMember(String poly, int i, TMember answer)
+        {
+            string testDescr = poly;
+            Console.Write("\n___________________________________________________________________________________\nTestGetMember: " + testDescr);
+            log(ConsoleColor.Magenta, " ? ");
+
+            //initialize polynom
+            TPoly p = new TPoly(TPoly.StringToMap(poly));
+
+            // calculation
+            var test = p.GetMember(i);
+
+            // write result
+            Console.Write(test.FCoeff + " " + test.FDegree);
 
             // checking
             if (test == answer) log(ConsoleColor.Green, "\t>>> ok \n");
